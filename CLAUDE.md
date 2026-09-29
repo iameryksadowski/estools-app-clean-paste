@@ -2,7 +2,7 @@
 
 ES Tools Clean Paste jako apka macOS w pasku menu + CLI `cleanpaste` + skill AI. Plan i decyzje: `docs/plan.md` (statusy faz aktualizujemy tam).
 
-- Marka **ES Tools by Eryk Sadowski** (`~/Development/eryksadowski-tools/estools/brand/BRAND.md`): zero Profitway, zero emoji, tylko krótki myślnik "-" i proste cudzysłowy " i '. Interfejs, README, CHANGELOG i komentarze po angielsku; `docs/instalacja.md`, ten plik i rozmowa z Erykiem po polsku.
+- Marka **ES Tools by Eryk Sadowski** (`~/Development/estools-docs/brand/BRAND.md (standardy produktów: estools-docs/docs/standards.md)`): zero Profitway, zero emoji, tylko krótki myślnik "-" i proste cudzysłowy " i '. Interfejs, README, CHANGELOG i komentarze po angielsku; `docs/instalacja.md`, ten plik i rozmowa z Erykiem po polsku.
 - Logika czyszczenia NIE jest tu pisana: to `src/lib/convert.ts` z `estools-plugin-raycast-clean-paste`, bundlowany do `Resources/convert.js` (`scripts/build-converter.sh`) i uruchamiany w JavaScriptCore. Zmiana zachowania = zmiana i testy w repo Raycasta, potem przebudowa `convert.js` tutaj i `scripts/test.sh`.
 - Build na Command Line Tools (Swift 5.10, SDK 14.4): licencja Xcode nie jest zaakceptowana (wymaga sudo, robi to Eryk). Targety: `CleanPasteCore` (biblioteka), `CleanPasteApp` (apka), `cleanpaste` (CLI, folder `Sources/CLI`; system plików nie rozróżnia wielkości liter).
 - Apka: `LSUIElement`, ikona w Docku tylko przy otwartym oknie (`DockIcon.show/hide`). Ikona jasna domyślnie, ciemna podmieniana w locie (`AppIcon`). Propozycje ikon: `design/proposals` (wybrana nr 1).
