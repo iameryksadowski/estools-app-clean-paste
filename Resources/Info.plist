@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key>
+	<string>Clean Paste</string>
+	<key>CFBundleDisplayName</key>
+	<string>Clean Paste</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.eryksadowski.estools.cleanpaste</string>
+	<key>CFBundleExecutable</key>
+	<string>CleanPasteApp</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>__VERSION__</string>
+	<key>CFBundleVersion</key>
+	<string>__BUILD__</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>14.0</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.productivity</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>ES Tools by Eryk Sadowski · eryksadowski.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>ES Tools Clean Paste</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>estools-clean-paste</string>
+			</array>
+		</dict>
+	</array>
+	<key>SUFeedURL</key>
+	<string>https://github.com/iameryksadowski/estools-app-clean-paste/releases/latest/download/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>__SU_PUBLIC_ED_KEY__</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUScheduledCheckInterval</key>
+	<integer>86400</integer>
+</dict>
+</plist>
