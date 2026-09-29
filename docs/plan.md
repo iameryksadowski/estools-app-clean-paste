@@ -174,16 +174,16 @@ Każda faza kończy się commitem na `development` i spełnionymi kryteriami odb
 3. Domyślny skrót Paste Clean ⌃⌥⌘V.
 4. Polska lokalizacja interfejsu.
 
-## 7. Status
+## 7. Status (29.09.2026)
 
 - [x] F0 Plan
 - [x] F1 Szkielet i konwerter (20/20 testów zgodności JavaScriptCore z TypeScript)
-- [ ] F2 Rdzeń
-- [ ] F3 Interfejs
-- [ ] F4 Ikona i brand
-- [ ] F5 Paczka
-- [ ] F6 Aktualizacje
-- [ ] F6b Skill AI
-- [ ] F7 Przekazanie Maćkowi
-- [ ] F8 Porządki ES Tools
+- [x] F2 Rdzeń (biblioteka, CLI `cleanpaste`, skróty, ustawienia)
+- [x] F3 Interfejs (pasek menu z sygnetem ES, okno ustawień, Dock tylko przy oknie - sprawdzone, HUD, schemat URL - Repair sprawdzony na żywo)
+- [x] F4 Ikona i brand (wariant E: sygnet w tle, zielony schowek; jasna domyślnie, ciemna w locie)
+- [x] F5 Paczka (universal .app, zip, DMG, instrukcja PL; podpis ad-hoc do czasu F6)
+- [ ] F6 Aktualizacje - skrypty gotowe; czeka na Eryka: `scripts/setup-signing.sh` (certyfikat i klucz w pęku kluczy) i repo publiczne, potem `scripts/release.sh`
+- [x] F6b Skill AI (`clean-paste` wgrany na claude.ai, kopia w `eryksadowski-tools/skills`)
+- [ ] F7 Przekazanie Maćkowi - DMG gotowy (`dist/`), docelowo komenda instalacyjna po F6
+- [x] F8 Porządki ES Tools (`estools-docs` z historią brandu, Logo Export z historią z powrotem w swoim repo, rejestr nazw) - PR-y otwarte
 - [ ] F9 Później
