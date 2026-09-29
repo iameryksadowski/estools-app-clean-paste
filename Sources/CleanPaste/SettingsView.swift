@@ -183,8 +183,8 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 520)
-        .fixedSize(horizontal: false, vertical: true)
+        // fits a 13-inch screen; the form scrolls
+        .frame(width: 520, height: 660)
         .onAppear {
             autoUpdates = updater.automaticallyChecks
             cliStatus = CommandLineTool.status()

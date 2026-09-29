@@ -6,11 +6,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var statusItem: NSStatusItem?
     private let preferences = Preferences.shared
     private var subscriptions = Set<AnyCancellable>()
+    private var appearanceObservation: NSKeyValueObservation?
     let updater = Updater()
     lazy var settings = SettingsWindowController(updater: updater)
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.mainMenu = MainMenu.build(target: self)
+        AppIcon.apply()
+        appearanceObservation = NSApp.observe(\.effectiveAppearance) { _, _ in
+            DispatchQueue.main.async { AppIcon.apply() }
+        }
         setUpStatusItem()
         registerHotKeys()
         preferences.$pasteCleanShortcut.dropFirst().sink { [weak self] _ in
@@ -111,7 +116,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             image.isTemplate = true
             item.button?.image = image
         }
-        item.button?.toolTip = "ES Tools Clean Paste"
+        item.button?.toolTip = "ES Tools"
         let menu = NSMenu()
         menu.delegate = self
         item.menu = menu
@@ -120,6 +125,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     func menuNeedsUpdate(_ menu: NSMenu) {
         menu.removeAllItems()
+        // One ES Tools icon in the menu bar; each tool is a section under it.
+        menu.addItem(.sectionHeader(title: "Clean Paste"))
         let paste = NSMenuItem(title: "Paste Clean", action: #selector(pasteCleanFromMenu), keyEquivalent: "")
         apply(preferences.pasteCleanShortcut, to: paste)
         paste.toolTip = "Clean the clipboard and paste it into the active app."
@@ -197,6 +204,18 @@ enum MainMenu {
         windowItem.submenu = window
         main.addItem(windowItem)
         return main
+    }
+}
+
+/// Light icon by default (the bundle's AppIcon.icns); the dark variant while macOS is in dark mode.
+enum AppIcon {
+    static func apply() {
+        let dark = NSApp.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+        if dark, let url = Bundle.main.url(forResource: "AppIcon-dark", withExtension: "png"), let image = NSImage(contentsOf: url) {
+            NSApp.applicationIconImage = image
+        } else {
+            NSApp.applicationIconImage = nil // back to the bundle icon
+        }
     }
 }
 
