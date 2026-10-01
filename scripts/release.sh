@@ -5,13 +5,15 @@
 set -eu
 cd "$(dirname "$0")/.."
 REPO="iameryksadowski/estools-app-clean-paste"
-[ -s Resources/sparkle-public-key.txt ] || { echo "Run scripts/setup-signing.sh first" >&2; exit 1; }
+[ -s Resources/sparkle-public-key.txt ] || { echo "Resources/sparkle-public-key.txt missing - run scripts/setup-signing.sh" >&2; exit 1; }
 ./scripts/build-app.sh
 VERSION="$(sed -n 's/^## \[\([0-9][0-9.]*\)\].*/\1/p' CHANGELOG.md | head -1)"
 BUILD="$(git rev-list --count HEAD)"
 ZIP="dist/CleanPaste-$VERSION.zip"
 BIN="$(find .build -type d -path '*artifacts/sparkle/Sparkle/bin' | head -1)"
-SIGNATURE="$("$BIN/sign_update" --account estools-clean-paste "$ZIP")"
+KEY="${SPARKLE_PRIVATE_KEY_FILE:-$HOME/.config/estools/signing/sparkle-private-key.txt}"
+[ -f "$KEY" ] || { echo "Update signing key not found: $KEY (1Password: ES Tools - Clean Paste signing)" >&2; exit 1; }
+SIGNATURE="$("$BIN/sign_update" --ed-key-file "$KEY" "$ZIP")"
 # Changelog section of this version, as HTML for the update window (cleaned by our own CLI)
 NOTES="$(awk -v v="$VERSION" '$0 ~ "^## \\[" v "\\]" {on=1; next} /^## \[/ {on=0} on' CHANGELOG.md)"
 NOTES_HTML="$(printf '%s\n' "$NOTES" | "dist/Clean Paste.app/Contents/Helpers/cleanpaste" --markdown --font-size 0 --keep-quotes --print html)"

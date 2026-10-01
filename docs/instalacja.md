@@ -4,7 +4,14 @@ Clean Paste wkleja tekst bez tła, kolorów i obcych fontów. Zostają pogrubien
 
 ## 1. Instalacja
 
-**Sposób A - jedna komenda (bez żadnych ostrzeżeń macOS)**
+**Sposób A - plik DMG (od Eryka)**
+
+1. Otwórz plik CleanPaste-1.0.0.dmg i przeciągnij Clean Paste na folder Aplikacje.
+2. Uruchom Clean Paste z Aplikacji. macOS pokaże komunikat, że nie może sprawdzić aplikacji - kliknij "Gotowe" (nie "Przenieś do Kosza").
+3. Otwórz Ustawienia systemowe > Prywatność i ochrona, przewiń w dół i przy "Clean Paste" kliknij "Otwórz mimo to", potem potwierdź hasłem lub Touch ID.
+4. To jest potrzebne tylko przy pierwszej instalacji. Aktualizacje instalują się już bez tego.
+
+**Sposób B - jedna komenda (bez żadnych ostrzeżeń macOS)**
 
 1. Otwórz aplikację Terminal (Cmd+Spacja, wpisz "Terminal", Enter).
 2. Wklej poniższą linię i naciśnij Enter:
@@ -12,13 +19,6 @@ Clean Paste wkleja tekst bez tła, kolorów i obcych fontów. Zostają pogrubien
    curl -fsSL https://github.com/iameryksadowski/estools-app-clean-paste/releases/latest/download/install.sh | sh
 
 3. Gotowe: Clean Paste jest w Aplikacjach i działa. Ikona pojawia się w pasku menu u góry ekranu.
-
-**Sposób B - plik DMG**
-
-1. Otwórz plik CleanPaste-*.dmg i przeciągnij Clean Paste do folderu Aplikacje.
-2. Uruchom Clean Paste z Aplikacji. macOS pokaże komunikat, że nie może sprawdzić aplikacji - kliknij "Gotowe".
-3. Otwórz Ustawienia systemowe > Prywatność i ochrona, przewiń w dół i przy "Clean Paste" kliknij "Otwórz mimo to", potem potwierdź hasłem.
-4. To jest potrzebne tylko raz.
 
 ## 2. Jedno pozwolenie: Dostępność
 
@@ -41,6 +41,8 @@ Clean Paste sam naciska Cmd+V, dlatego macOS raz pyta o zgodę.
 - **Formatting** - zamiana długich myślników na "-", zamiana cudzysłowów na proste, rozmiar tekstu (domyślnie 12 px, jak w Apple Mail).
 - **Open at login** - Clean Paste startuje razem z Makiem.
 - **Updates** - gdy wyjdzie nowa wersja, Clean Paste pokaże listę zmian i zapyta, czy zainstalować.
+
+**Po aktualizacji:** macOS może ponownie poprosić o Dostępność. Clean Paste sam otworzy wtedy swoje okno - kliknij "Allow Accessibility" i w Ustawieniach systemowych wyłącz, a potem włącz przełącznik przy Clean Paste.
 
 Gdy okno ustawień jest otwarte, Clean Paste ma ikonę w Docku. Po zamknięciu okna zostaje tylko w pasku menu.
 

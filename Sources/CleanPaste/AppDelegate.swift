@@ -25,9 +25,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             DispatchQueue.main.async { self?.registerHotKeys() }
         }.store(in: &subscriptions)
         updater.start()
+        let trusted = Clipboard.canPaste
         if preferences.isFirstLaunch {
             preferences.isFirstLaunch = false
             settings.show()
+        } else if !trusted && UserDefaults.standard.bool(forKey: "accessibilityWasAllowed") {
+            // macOS drops the permission when an update changes the app's signature:
+            // show the one-click way back instead of failing silently.
+            settings.show()
+        }
+        if trusted {
+            UserDefaults.standard.set(true, forKey: "accessibilityWasAllowed")
+        }
+        // remember the permission once it is given while the app runs
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+            if Clipboard.canPaste {
+                UserDefaults.standard.set(true, forKey: "accessibilityWasAllowed")
+                timer.invalidate()
+            }
         }
     }
 

@@ -2,7 +2,7 @@
 # One-time setup on the release Mac (run it yourself, it changes your keychain):
 # 1. "ES Tools Code Signing" - a free self-signed certificate. A stable signature keeps
 #    the Accessibility permission across updates.
-# 2. Sparkle EdDSA key - installed apps accept only updates signed with it.
+# 2. Sparkle EdDSA key (a file, created once) - installed apps accept only updates signed with it.
 # Backups land in ~/.config/estools/signing; move them to 1Password right after.
 set -eu
 cd "$(dirname "$0")/.."
@@ -27,12 +27,14 @@ else
   echo "Certificate: imported"
 fi
 
-swift package resolve >/dev/null 2>&1 || true
-BIN="$(find .build -type d -path '*artifacts/sparkle/Sparkle/bin' | head -1)"
-[ -n "$BIN" ] || { echo "Sparkle tools not found - run swift build first" >&2; exit 1; }
-"$BIN/generate_keys" --account estools-clean-paste | sed -n 's/.*<string>\(.*\)<\/string>.*/\1/p' | head -1 > Resources/sparkle-public-key.txt
-[ -s Resources/sparkle-public-key.txt ] || "$BIN/generate_keys" --account estools-clean-paste -p > Resources/sparkle-public-key.txt
-[ -f "$OUT/sparkle-private-key.txt" ] || { "$BIN/generate_keys" --account estools-clean-paste -x "$OUT/sparkle-private-key.txt"; chmod 600 "$OUT/sparkle-private-key.txt"; }
+# Sparkle EdDSA key as a file (no keychain): the private key signs updates, the public
+# key ships in the app (Resources/sparkle-public-key.txt).
+if [ ! -f "$OUT/sparkle-private-key.txt" ]; then
+  /opt/homebrew/bin/openssl genpkey -algorithm ed25519 -out "$OUT/sparkle-ed25519.pem" 2>/dev/null || openssl genpkey -algorithm ed25519 -out "$OUT/sparkle-ed25519.pem"
+  openssl pkey -in "$OUT/sparkle-ed25519.pem" -outform DER | tail -c 32 | base64 > "$OUT/sparkle-private-key.txt"
+  chmod 600 "$OUT"/*
+fi
+openssl pkey -in "$OUT/sparkle-ed25519.pem" -pubout -outform DER | tail -c 32 | base64 > Resources/sparkle-public-key.txt
 echo "Sparkle public key: $(cat Resources/sparkle-public-key.txt) (Resources/sparkle-public-key.txt, commit it)"
 echo
 echo "Now add to 1Password (item \"ES Tools - Clean Paste signing\") and delete the local copies:"

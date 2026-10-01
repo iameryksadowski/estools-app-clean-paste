@@ -5,10 +5,12 @@
 # (scripts/setup-signing.sh), otherwise ad-hoc.
 set -eu
 cd "$(dirname "$0")/.."
-VERSION="$(sed -n 's/^## \[\([0-9][0-9.]*\)\].*/\1/p' CHANGELOG.md | head -1)"
-BUILD="$(git rev-list --count HEAD 2>/dev/null || echo 1)"
+# VERSION, BUILD and DIST can be overridden (e.g. a local update test)
+VERSION="${VERSION:-$(sed -n 's/^## \[\([0-9][0-9.]*\)\].*/\1/p' CHANGELOG.md | head -1)}"
+BUILD="${BUILD:-$(git rev-list --count HEAD 2>/dev/null || echo 1)}"
+DIST="${DIST:-dist}"
 [ -n "$VERSION" ] || { echo "No version in CHANGELOG.md" >&2; exit 1; }
-APP="dist/Clean Paste.app"
+APP="$DIST/Clean Paste.app"
 IDENTITY="ES Tools Code Signing"
 security find-certificate -c "$IDENTITY" >/dev/null 2>&1 || IDENTITY="-"
 PUBLIC_KEY="$(cat Resources/sparkle-public-key.txt 2>/dev/null || true)"
@@ -28,6 +30,7 @@ for tool in CleanPasteApp cleanpaste; do
 done
 
 rm -rf "$APP"
+mkdir -p "$DIST"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$APP/Contents/Helpers" "$APP/Contents/Frameworks"
 cp "$BIN/CleanPasteApp" "$APP/Contents/MacOS/CleanPasteApp"
 cp "$BIN/cleanpaste" "$APP/Contents/Helpers/cleanpaste"
@@ -51,11 +54,11 @@ sign "$APP"
 codesign --verify --deep --strict "$APP"
 echo "Signed with: $IDENTITY"
 
-ZIP="dist/CleanPaste-$VERSION.zip"
+ZIP="$DIST/CleanPaste-$VERSION.zip"
 rm -f "$ZIP"
 ditto -c -k --sequesterRsrc --keepParent "$APP" "$ZIP"
 
-DMG="dist/CleanPaste-$VERSION.dmg"
+DMG="$DIST/CleanPaste-$VERSION.dmg"
 STAGE="$(mktemp -d)/Clean Paste"
 mkdir -p "$STAGE"
 ditto "$APP" "$STAGE/Clean Paste.app"

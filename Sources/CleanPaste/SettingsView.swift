@@ -72,7 +72,7 @@ struct SettingsView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Label("One step left: allow Accessibility", systemImage: "hand.raised")
                             .font(.headline)
-                        Text("Clean Paste presses Cmd+V for you, and macOS asks for your permission once. Click the button, turn on Clean Paste in the list and come back here.")
+                        Text("Clean Paste presses Cmd+V for you, and macOS asks for your permission. Click the button, turn on Clean Paste in the list and come back here. After an update, if Clean Paste is already on, turn it off and on again.")
                             .font(.callout)
                             .foregroundStyle(.secondary)
                             .fixedSize(horizontal: false, vertical: true)
