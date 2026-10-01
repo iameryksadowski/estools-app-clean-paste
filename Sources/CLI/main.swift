@@ -4,7 +4,7 @@ import CleanPasteCore
 // cleanpaste - the ES Tools Clean Paste command line tool. Same cleaning as the app
 // and the Raycast extension; meant for people, scripts and AI assistants.
 
-let version = "1.0.0"
+let version = "1.0.1"
 
 let usage = """
 cleanpaste \(version) - ES Tools Clean Paste

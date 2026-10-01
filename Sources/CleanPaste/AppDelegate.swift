@@ -119,7 +119,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc func checkForUpdates() { updater.checkForUpdates() }
 
-    @objc func showAbout() { settings.show() }
+    /// The standard About window with the ES Tools credit; opens over other apps without a Dock icon.
+    @objc func showAbout() {
+        let credits = NSMutableAttributedString(
+            string: "ES Tools by Eryk Sadowski\n",
+            attributes: [.font: NSFont.systemFont(ofSize: 11, weight: .medium), .foregroundColor: NSColor.labelColor]
+        )
+        credits.append(NSAttributedString(
+            string: "eryksadowski.com",
+            attributes: [.font: NSFont.systemFont(ofSize: 11), .link: URL(string: "https://eryksadowski.com")!]
+        ))
+        let center = NSMutableParagraphStyle()
+        center.alignment = .center
+        credits.addAttribute(.paragraphStyle, value: center, range: NSRange(location: 0, length: credits.length))
+        NSApp.activate(ignoringOtherApps: true)
+        NSApp.orderFrontStandardAboutPanel(options: [
+            .applicationName: "ES Tools Clean Paste",
+            .credits: credits,
+        ])
+    }
+
+    static var versionTitle: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "dev"
+        return "Clean Paste \(version)"
+    }
 
     @objc func allowAccessibility() { Permissions.requestAccessibility() }
 
@@ -159,9 +182,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(.separator())
         menu.addItem(NSMenuItem(title: "Settings...", action: #selector(openSettings), keyEquivalent: ","))
         menu.addItem(NSMenuItem(title: "Check for Updates...", action: #selector(checkForUpdates), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "About Clean Paste", action: #selector(showAbout), keyEquivalent: ""))
         menu.addItem(.separator())
         menu.addItem(NSMenuItem(title: "Quit Clean Paste", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
-        for item in menu.items where item.action != #selector(NSApplication.terminate(_:)) {
+        // the installed version, so an update is visible at a glance
+        let version = NSMenuItem(title: AppDelegate.versionTitle, action: nil, keyEquivalent: "")
+        version.isEnabled = false
+        menu.addItem(version)
+        for item in menu.items where item.action != #selector(NSApplication.terminate(_:)) && item.action != nil {
             item.target = self
         }
     }

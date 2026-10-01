@@ -1,5 +1,16 @@
 # ES Tools Clean Paste (app) Changelog
 
+## [1.0.1] - 2026-10-01
+
+### Added
+
+- The menu bar menu shows the installed version at the bottom, so you can see at a glance that an update went through.
+- **About Clean Paste** in the menu bar menu.
+
+### Changed
+
+- After an update that takes away the Accessibility permission, Clean Paste opens its settings with the one-click way back.
+
 ## [1.0.0] - 2026-09-29
 
 ### Added
