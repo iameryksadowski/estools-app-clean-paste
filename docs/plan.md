@@ -174,7 +174,7 @@ Każda faza kończy się commitem na `development` i spełnionymi kryteriami odb
 3. Domyślny skrót Paste Clean ⌃⌥⌘V.
 4. Polska lokalizacja interfejsu.
 
-## 7. Status (29.09.2026)
+## 7. Status (01.10.2026)
 
 - [x] F0 Plan
 - [x] F1 Szkielet i konwerter (20/20 testów zgodności JavaScriptCore z TypeScript)
@@ -182,8 +182,8 @@ Każda faza kończy się commitem na `development` i spełnionymi kryteriami odb
 - [x] F3 Interfejs (pasek menu z sygnetem ES, okno ustawień, Dock tylko przy oknie - sprawdzone, HUD, schemat URL - Repair sprawdzony na żywo)
 - [x] F4 Ikona i brand (wariant E: sygnet w tle, zielony schowek; jasna domyślnie, ciemna w locie)
 - [x] F5 Paczka (universal .app, zip, DMG, instrukcja PL; podpis ad-hoc do czasu F6)
-- [ ] F6 Aktualizacje - skrypty gotowe; czeka na Eryka: `scripts/setup-signing.sh` (certyfikat i klucz w pęku kluczy) i repo publiczne, potem `scripts/release.sh`
+- [~] F6 Aktualizacje - klucz EdDSA w pliku (`~/.config/estools/signing`, poza pęku kluczy), klucz publiczny w apce, pełna aktualizacja 1.0.0 -> 1.0.1 sprawdzona lokalnie (okno ze zmianami, podpis, podmiana, restart). Czeka na Eryka: repo publiczne, potem `scripts/release.sh`; opcjonalnie stały certyfikat (`scripts/setup-signing.sh`), żeby Dostępność przetrwała aktualizacje
 - [x] F6b Skill AI (`clean-paste` wgrany na claude.ai, kopia w `eryksadowski-tools/skills`)
-- [ ] F7 Przekazanie Maćkowi - DMG gotowy (`dist/`), docelowo komenda instalacyjna po F6
-- [x] F8 Porządki ES Tools (`estools-docs` z historią brandu, Logo Export z historią z powrotem w swoim repo, rejestr nazw) - PR-y otwarte
+- [x] F7 Przekazanie Maćkowi - DMG 1.0.0 z PDF "Jak zainstalować" oddany Erykowi (01.10)
+- [x] F8 Porządki ES Tools (`estools-docs` z historią brandu, Logo Export z historią z powrotem w swoim repo, rejestr nazw) - PR-y zmergowane
 - [ ] F9 Później
