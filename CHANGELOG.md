@@ -4,12 +4,15 @@
 
 ### Added
 
+- **About Clean Paste** in the menu bar menu: the tool, its version and build, ES Tools, the author (Eryk Sadowski) and links to the source code, changelog and license.
+- **Add to Raycast** in Settings > General: saves Paste Clean, Repair Clipboard, Settings and About as Raycast Quicklinks ("Clean Paste for Raycast.json" in Downloads) and opens Raycast for its Import Quicklinks command; give them Raycast hotkeys if you like.
+- `estools-clean-paste://about` link.
 - The menu bar menu shows the installed version at the bottom, so you can see at a glance that an update went through.
-- **About Clean Paste** in the menu bar menu.
 
 ### Changed
 
 - After an update that takes away the Accessibility permission, Clean Paste opens its settings with the one-click way back.
+- A paste started from a link (Raycast, scripts) waits a moment longer, so the launcher can close and the target app comes back first.
 
 ## [1.0.0] - 2026-09-29
 

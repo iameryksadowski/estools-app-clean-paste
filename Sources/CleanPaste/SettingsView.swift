@@ -42,6 +42,7 @@ struct SettingsView: View {
     @State private var loginError: String?
     @State private var autoUpdates = false
     @State private var cliStatus = CommandLineTool.status()
+    @State private var raycastNote: String?
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     private var version: String {
@@ -150,6 +151,17 @@ struct SettingsView: View {
                     Text("Command line tool")
                     Text(cliStatus.note ?? "cleanpaste for Terminal, scripts and AI assistants. See cleanpaste --help.")
                 }
+                LabeledContent {
+                    Button("Add to Raycast") {
+                        raycastNote = RaycastIntegration.install()
+                    }
+                    .disabled(!RaycastIntegration.isInstalled)
+                } label: {
+                    Text("Raycast")
+                    Text(raycastNote ?? (RaycastIntegration.isInstalled
+                        ? "Paste Clean, Repair Clipboard and Settings as Raycast commands; give them Raycast hotkeys if you like."
+                        : "Raycast is not installed."))
+                }
             }
 
             Section("Updates") {
@@ -255,5 +267,37 @@ enum CommandLineTool {
             result.note = "Installed. Add ~/.local/bin to your PATH to use cleanpaste in Terminal."
         }
         return result
+    }
+}
+
+/// Raycast Quicklinks that call Clean Paste through its links (estools-clean-paste://...).
+/// Raycast imports them from a JSON file with its Import Quicklinks command.
+enum RaycastIntegration {
+    static var raycastURL: URL? { NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.raycast.macos") }
+    static var isInstalled: Bool { raycastURL != nil }
+
+    static let quicklinks: [[String: String]] = [
+        ["name": "Clean Paste: Paste Clean", "link": "estools-clean-paste://paste"],
+        ["name": "Clean Paste: Repair Clipboard", "link": "estools-clean-paste://repair"],
+        ["name": "Clean Paste: Settings", "link": "estools-clean-paste://settings"],
+        ["name": "Clean Paste: About", "link": "estools-clean-paste://about"],
+    ]
+
+    static var fileURL: URL {
+        FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0].appendingPathComponent("Clean Paste for Raycast.json")
+    }
+
+    /// Writes the import file to Downloads, opens Raycast and returns the next steps.
+    static func install() -> String {
+        do {
+            let data = try JSONSerialization.data(withJSONObject: quicklinks, options: [.prettyPrinted, .withoutEscapingSlashes])
+            try data.write(to: fileURL, options: .atomic)
+        } catch {
+            return "Could not write the file for Raycast: \(error.localizedDescription)"
+        }
+        if let raycastURL {
+            NSWorkspace.shared.openApplication(at: raycastURL, configuration: NSWorkspace.OpenConfiguration())
+        }
+        return "Almost done: in Raycast type Import Quicklinks, press Return and choose \"Clean Paste for Raycast.json\" in Downloads. Hotkeys: Raycast Settings > Extensions > Quicklinks."
     }
 }

@@ -35,7 +35,7 @@ cleanpaste --repair                     # fix the clipboard, then paste anywhere
 
 `cleanpaste --help` lists every option. The `skills/clean-paste` skill teaches Claude to hand over drafts through `cleanpaste --copy`, so they paste already formatted.
 
-Links for Raycast and scripts: `estools-clean-paste://paste`, `estools-clean-paste://repair`, `estools-clean-paste://settings`.
+**Raycast:** Settings > General > Add to Raycast saves the commands as Raycast Quicklinks and opens Raycast; there, run Import Quicklinks and pick "Clean Paste for Raycast.json" in Downloads. The links work in any launcher or script: `estools-clean-paste://paste`, `://repair`, `://settings`, `://about`.
 
 ## How it works
 

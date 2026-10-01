@@ -52,12 +52,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         return false
     }
 
-    // estools-clean-paste://paste, ://repair, ://settings (Raycast deeplinks, scripts)
+    // estools-clean-paste://paste, ://repair, ://settings, ://about (Raycast, scripts)
     func application(_ application: NSApplication, open urls: [URL]) {
         for url in urls where url.scheme == "estools-clean-paste" {
             switch url.host ?? url.path.trimmingCharacters(in: CharacterSet(charactersIn: "/")) {
-            case "paste": pasteClean(delay: 0.1)
+            case "paste": pasteClean(delay: 0.35) // let a launcher (Raycast) close and the target app come back
             case "repair": repairClipboard()
+            case "about": showAbout()
             default: settings.show()
             }
         }
@@ -119,25 +120,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc func checkForUpdates() { updater.checkForUpdates() }
 
-    /// The standard About window with the ES Tools credit; opens over other apps without a Dock icon.
-    @objc func showAbout() {
-        let credits = NSMutableAttributedString(
-            string: "ES Tools by Eryk Sadowski\n",
-            attributes: [.font: NSFont.systemFont(ofSize: 11, weight: .medium), .foregroundColor: NSColor.labelColor]
-        )
-        credits.append(NSAttributedString(
-            string: "eryksadowski.com",
-            attributes: [.font: NSFont.systemFont(ofSize: 11), .link: URL(string: "https://eryksadowski.com")!]
-        ))
-        let center = NSMutableParagraphStyle()
-        center.alignment = .center
-        credits.addAttribute(.paragraphStyle, value: center, range: NSRange(location: 0, length: credits.length))
-        NSApp.activate(ignoringOtherApps: true)
-        NSApp.orderFrontStandardAboutPanel(options: [
-            .applicationName: "ES Tools Clean Paste",
-            .credits: credits,
-        ])
-    }
+    lazy var about = AboutWindowController(updater: updater)
+
+    /// The tool, ES Tools, the author and the version, in one window.
+    @objc func showAbout() { about.show() }
 
     static var versionTitle: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "dev"
