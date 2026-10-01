@@ -63,7 +63,7 @@ STAGE="$(mktemp -d)/Clean Paste"
 mkdir -p "$STAGE"
 ditto "$APP" "$STAGE/Clean Paste.app"
 ln -s /Applications "$STAGE/Applications"
-cp docs/instalacja.md "$STAGE/Jak zainstalowac.txt" 2>/dev/null || true
+cp "docs/guide/Clean-Paste-instalacja.pdf" "$STAGE/Jak zainstalować.pdf" 2>/dev/null || cp docs/instalacja.md "$STAGE/Jak zainstalowac.txt"
 rm -f "$DMG"
 hdiutil create -quiet -volname "Clean Paste $VERSION" -srcfolder "$STAGE" -format UDZO -ov "$DMG"
 echo "$APP"

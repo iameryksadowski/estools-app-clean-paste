@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>ES Tools Clean Paste - instalacja</title>
+<meta name="author" content="Eryk Sadowski">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: Geist, "Helvetica Neue", Arial, sans-serif; color: #171717; font-size: 10pt; line-height: 1.42; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { position: relative; width: 210mm; height: 297mm; padding: 15mm 16mm 18mm; overflow: hidden; background: #FFFFFF; }
+  .sig { position: absolute; right: -60mm; bottom: -70mm; width: 190mm; height: 190mm; opacity: 1; }
+  .content { position: relative; }
+  header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 9pt; border-bottom: 0.6pt solid #E4E4E7; }
+  header img { height: 17pt; }
+  header .url { font-family: "Geist Mono", Menlo, monospace; font-size: 8pt; color: #737373; }
+  .hero { display: flex; gap: 14pt; align-items: center; margin: 16pt 0 6pt; }
+  .hero img { width: 62pt; height: 62pt; }
+  .eyebrow { font-family: "Geist Mono", Menlo, monospace; font-size: 7.6pt; letter-spacing: 0.6pt; text-transform: uppercase; color: #059669; font-weight: 500; }
+  .eyebrow::before { content: ""; display: inline-block; width: 5pt; height: 5pt; border-radius: 50%; background: #10B981; margin-right: 5pt; vertical-align: 1pt; }
+  h1 { font-size: 23pt; font-weight: 600; letter-spacing: -0.02em; line-height: 1.12; margin: 4pt 0 0; }
+  .lead { font-size: 10.6pt; color: #262626; margin: 8pt 0 12pt; max-width: 165mm; }
+  h2 { font-size: 12.4pt; font-weight: 600; letter-spacing: -0.01em; margin: 13pt 0 6pt; }
+  h2::before { content: ""; display: block; width: 22pt; height: 3pt; background: #10B981; margin-bottom: 6pt; }
+  ol.steps { list-style: none; padding: 0; margin: 0; counter-reset: s; }
+  ol.steps li { counter-increment: s; position: relative; padding-left: 24pt; margin: 0 0 6pt; }
+  ol.steps li::before { content: counter(s); position: absolute; left: 0; top: -0.5pt; width: 15pt; height: 15pt; border-radius: 50%; background: #10B981; color: #0A0A0A; font-weight: 600; font-size: 8.4pt; text-align: center; line-height: 15pt; }
+  b { font-weight: 600; }
+  .key { display: inline-block; font-family: "Geist Mono", Menlo, monospace; font-size: 8.6pt; padding: 1pt 5pt; border: 0.8pt solid #D4D4D8; border-bottom-width: 1.6pt; border-radius: 4pt; background: #FAFAFA; margin: 0 1pt; }
+  .note { background: #F4F4F5; border-left: 3pt solid #10B981; border-radius: 0 6pt 6pt 0; padding: 8pt 11pt; margin: 9pt 0; color: #262626; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14pt; }
+  .code { font-family: "Geist Mono", Menlo, monospace; font-size: 7.8pt; background: #FAFAFA; border: 0.6pt solid #E4E4E7; border-radius: 5pt; padding: 6pt 8pt; word-break: break-all; color: #171717; }
+  .muted { color: #737373; }
+  ul.plain { margin: 0; padding-left: 13pt; }
+  ul.plain li { margin: 0 0 4pt; }
+  footer { position: absolute; left: 16mm; right: 16mm; bottom: 9mm; display: flex; justify-content: space-between; font-size: 7.4pt; color: #737373; border-top: 0.6pt solid #E4E4E7; padding-top: 5pt; }
+  footer .dot { color: #10B981; }
+</style>
+</head>
+<body>
+<div class="page">
+  <svg class="sig" viewBox="92 92 328 328" aria-hidden="true"><path fill="#F4F4F5" d="M256.206,107.52c-34.178,0-66.242,11.965-91.989,31.765l38.096,33.071c15.585-10.858,34.178-17.189,53.879-17.189,52.673,0,97.312,45.945,97.312,100.633,0,14.279-3.023,27.947-8.346,40.409l40.111,34.789c13.569-22.213,21.319-47.946,21.319-75.198,0-80.62-68.456-148.281-150.396-148.281h.014ZM256.206,356.931c-53.084,0-97.709-45.945-97.709-101.13,0-14.279,3.023-27.947,8.545-40.31l-40.111-34.789c-13.669,22.114-21.518,47.847-21.518,75.099,0,80.62,69.364,148.679,150.794,148.679,34.377,0,66.455-11.965,91.989-31.865l-38.096-33.071c-15.485,10.958-34.178,17.387-53.879,17.387h-.014Z"/></svg>
+  <div class="content">
+    <header>
+      <img src="estools-wordmark-dark.svg" alt="estools">
+      <span class="url">eryksadowski.com</span>
+    </header>
+
+    <div class="hero">
+      <img src="icon.png" alt="">
+      <div>
+        <div class="eyebrow">ES Tools · Clean Paste 1.0.0</div>
+        <h1>Wklejanie bez formatowania.<br>Instalacja w 3 minuty.</h1>
+      </div>
+    </div>
+    <p class="lead">Clean Paste wkleja tekst bez tła, kolorów i obcych fontów. Zostają pogrubienia, listy, linki i entery, a tekst przyjmuje styl miejsca, do którego wklejasz: Mail, Gmail, Outlook, Slack, Notatki, Word.</p>
+
+    <div class="cols">
+      <div>
+        <h2>1. Instalacja</h2>
+        <ol class="steps">
+          <li>Otwórz plik <b>CleanPaste-1.0.0.dmg</b> i przeciągnij <b>Clean Paste</b> na folder <b>Aplikacje</b>.</li>
+          <li>Uruchom Clean Paste z Aplikacji. Gdy macOS powie, że nie może sprawdzić aplikacji, kliknij <b>Gotowe</b>.</li>
+          <li>Otwórz <b>Ustawienia systemowe &gt; Prywatność i ochrona</b>, przewiń w dół i przy Clean Paste kliknij <b>Otwórz mimo to</b>. Potwierdź hasłem lub Touch ID.</li>
+          <li>Ten krok jest tylko przy pierwszej instalacji. Kolejne wersje instalują się bez niego.</li>
+        </ol>
+      </div>
+      <div>
+        <h2>2. Jedno pozwolenie</h2>
+        <ol class="steps">
+          <li>Clean Paste sam naciska Cmd+V, dlatego macOS raz pyta o zgodę. W oknie Clean Paste kliknij <b>Allow Accessibility</b>.</li>
+          <li>W Ustawieniach systemowych włącz przełącznik przy <b>Clean Paste</b>.</li>
+          <li>Wróć do okna Clean Paste i zamknij je. Apka zostaje w pasku menu u góry ekranu, przy zegarze.</li>
+        </ol>
+      </div>
+    </div>
+
+    <h2>3. Codzienne użycie</h2>
+    <ol class="steps">
+      <li>Skopiuj tekst jak zwykle: <span class="key">Cmd</span>+<span class="key">C</span> - z przeglądarki, czatu, dokumentu.</li>
+      <li>Zamiast zwykłego wklejania naciśnij <span class="key">Control</span>+<span class="key">Option</span>+<span class="key">Command</span>+<span class="key">V</span>. Tekst wklei się czysty.</li>
+      <li>Albo kliknij ikonę w pasku menu i wybierz <b>Paste Clean</b>. <b>Repair Clipboard</b> tylko czyści schowek - potem wklejasz zwykłym Cmd+V.</li>
+    </ol>
+
+    <div class="note"><b>Aktualizacje.</b> Gdy wyjdzie nowa wersja, Clean Paste pokaże listę zmian i zapyta, czy zainstalować. Po aktualizacji macOS może ponownie poprosić o pozwolenie: Clean Paste sam otworzy swoje okno - kliknij Allow Accessibility i w Ustawieniach systemowych wyłącz, a potem włącz przełącznik przy Clean Paste.</div>
+
+    <div class="cols">
+      <div>
+        <h2>Ustawienia</h2>
+        <ul class="plain">
+          <li>Ikona w pasku menu &gt; <b>Settings...</b></li>
+          <li>Własne skróty, rozmiar tekstu (domyślnie 12 px, jak w Apple Mail), zamiana długich myślników i cudzysłowów na zwykłe.</li>
+          <li><b>Open at login</b> - Clean Paste startuje razem z Makiem.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Odinstalowanie</h2>
+        <ul class="plain">
+          <li>Ikona w pasku menu &gt; <b>Quit Clean Paste</b>.</li>
+          <li>Przeciągnij Clean Paste z Aplikacji do Kosza.</li>
+          <li class="muted">Wymagany macOS 14 Sonoma lub nowszy, Mac z Apple Silicon albo Intel.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <span>ES Tools · Clean Paste - instalacja · v1.0.0 · październik 2026</span>
+    <span><span class="dot">●</span> eryksadowski.com · str. 1 / 1</span>
+  </footer>
+</div>
+</body>
+</html>
